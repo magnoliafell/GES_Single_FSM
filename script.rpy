@@ -3,7 +3,7 @@
 define mc = Character("Della") #mcnya della
 # define na = Character("Nadia")
 define al = Character("Aldi")
-define ds = Character("??")
+define ds = Character("Dosen ??")
 define ct = Character("Ibu Kantin")
 
 default lab_is_solved = False
@@ -11,44 +11,55 @@ default class_is_solved = False
 default aula_is_solved = False
 default canteen_is_solved = False
 
+image ct1 = "images/ct1.png"
+image ct2 = "images/ct.png"
+image mc1 = "images/mc/mc.png"
+image mc2 = "images/mc/mc1.png"
+image mc3 = "images/mc/mc2.png"
+image mc4 = "images/mc/mc3.png"
+image mc5 = "images/mc/mc4.png"
+image aldi1 = "images/aldi/aldi.png"
+image ds = "images/char/ds.png"
+image dss = "images/char/dss.png"
 image bg supeno = "images/bg/supeno.png"
-image bg lobby = "images/bg/lobby.png"
-image bg classroom = "images/bg/classroom.png"
-image bg infor = "images/bg/infor.png"
-image bg kcv = "images/bg/kcv.png"
-image bg rpl = "images/bg/rpl.png"
-image bg giga = "images/bg/giga.png"
-image bg pkt = "images/bg/pkt.png"
-image bg netics = "images/bg/netics.png"
-image bg mci = "images/bg/mci.png"
-image bg alpro = "images/bg/alpro.png"
+image bg lobby = "images/bg/lobby.jpg"
+image bg classroom = "images/bg/classroom.jpg"
+image bg infor = "images/bg/infor.jpg"
+image bg kcv = "images/bg/kcv.jpg"
+image bg rpl = "images/bg/rpl.jpg"
+image bg giga = "images/bg/giga.jpg"
+image bg netics = "images/bg/ajk.jpg"
+image bg alpro = "images/bg/alpro.jpg"
+image bg kbj = "images/bg/kbj.jpg"
 image bg aula = "images/bg/aula.png"
-image bg canteen = "images/bg/canteen.png"
-image bg car parkinglot = "images/bg/car.png"
-image bg aisle = "images/bg/aisle.png"
-image bg aisleC = "images/bg/aisleeC.png"
-image bg 111 = "images/bg/111.png"
-image bg black = "images/bg/black.png"
-image bg pintu 111 = "images/bg/pintu111.png"
-image bg 105 = "images/bg/105.png"
-image bg 107 = "images/bg/107.png"
-image bg 101 = "images/bg/101.png"
+image bg canteen = "images/bg/canteen.jpg"
+image bg car parkinglot = "images/bg/car.jpg"
+image bg aisle = "images/bg/aisle.jpg"
+image bg aisleC = "images/bg/aisleeC.jpg"
+image bg 111 = "images/bg/111.jpg"
+image bg black = "images/bg/black.jpg"
+image bg pintu111 = "images/bg/pintu111.jpg"
+image bg 105 = "images/bg/105.jpg"
+image bg 107 = "images/bg/107.jpg"
+image bg 101 = "images/bg/101.jpg"
 image bg musholla = "images/bg/musholla.png"
 image bg floor = "images/bg/floor.png"
-image bg blackboard = "images/bg/blackboard.png"
+image bg blackboard = "images/bg/blackboard.jpg"
 image bg pcstart = "images/bg/pcstart.png"
-image bg paper clue = "images/bg/paperclue.png"
+image bg paper clue = "images/bg/paperclue.jpg"
 image bg biner1 = "images/bg/biner1.png"
 image bg biner2 = "images/bg/biner2.png"
 image bg biner3 = "images/bg/biner3.png"
-image bg biner4 = "images/bg/biner4.png"
 image bg blackoutScreen = "images/bg/blackoutScreen.png"
 image bg rScreen = "images/bg/rScreen.png"
 image bg blankBlackboard = "images/bg/blankBlackboard.png"
 image bg bBlackboard = "images/bg/bBlackboard.png"
-image bg staticElectricity = "images/bg/staticElectricity.png"
-image bg fog = "images/bg/staticElectricity.png"
-image bg white = "images/bg/white.png"
+image bg staticElectricity = "images/bg/staticElectricity.jpg"
+image bg fog = "images/bg/staticElectricity.jpg"
+image bg white = "images/bg/white.jpg"
+image bg class1 = "images/bg/class1.png"
+image bg class2 = "images/bg/class2.png"
+image bg class3 = "images/bg/class3.png"
 # The game starts here.
 
 label start:
@@ -56,10 +67,10 @@ label start:
     show aldi at left
     al "Kamu... pernah dengar rumor kelas tengah malam di TC?"
     hide aldi
-    show mc at right
+    show mc1 at right
     mc "Huh? Aku ngga pernah denger, tuh"
     mc "Jangan bilang kamu mau nyoba buktiin?"
-    hide mc
+    hide mc1
     show aldi at left
     al "Ya iyalah, pasti. Kamu ikut kan?"
     hide aldi
@@ -67,23 +78,23 @@ label start:
         "Apa yang akan kamu pilih?" 
 
         "Ikut Aldi menyelidiki":
-            show mc at right
+            show mc1 at right
             mc "Ayo, aku juga penasaran."
-            hide mc
+            hide mc1
             show aldi at left
-            al "Oke, kita kumpul di TC jam 23.12, ya"
-            hide mc
+            al "Oke, kita ketemu di TC jam 23.11, ya"
+            hide mc1
             hide aldi
             $ is_investigating = True
         "Tidak mau menyelidiki":
-            show mc
+            show mc1
             mc "Kayaknya mending kita pulang aja deh. Perasaanku ga enak."
             $ is_investigating = False
 
 if is_investigating:
     jump firstNight
 else:
-    scene bg classroom
+    scene bg infor
     "Kamu merasa bahwa menyelidiki kampusmu di malam hari bukanlah pilihan yang tepat. Kamu tidak pernah tau apa yang terjadi sampai kamu lulus dari Teknik Informatika."
     return
 
@@ -168,11 +179,11 @@ label firstEvent:
     show aldi at left
     al "Tuh kan! Bener ada!"
     hide aldi
-    show mc at right
+    show mc4 at right
     mc "Gila, kok bisaada suara jam segini."
     # hide mc
     "{i}Aku rasa kita harus menghentikan penyelidikan ini. Tapi... Kita sudah sejauh ini."
-    hide mc
+    hide mc4
     "Della merasa semakin bimbang. Della merasa bahwa mereka harus menghentikan penyelidikan mereka di sini. Namun di sisi lain, Della juga penasaran atas kebenaran rumor tersebut."
     menu:
         "Ajak Aldi untuk masuk ke Kelas 111":
@@ -182,9 +193,9 @@ label firstEvent:
             jump event111
 
         "Minta Aldi untuk mengecek":
-            show mc at right
+            show mc2 at right
             mc "Aku ngerasa ini ide buruk deh, Al."
-            hide mc
+            hide mc2
             show aldi at left
             al "Ayolah, pengecut!"
             hide aldi
@@ -208,9 +219,9 @@ label event111:
     "{i}Deg... Deg.. Deg..."
     #insert sound chair being pulled
     "Melihat hal tersebut, Aldi yang {i} excited {/i} langsung mengambil bangku paling depan."
-    show mc #focus on center, zoom
+    show mc2 #focus on center, zoom
     "{i} AH! Aku harus pulang sekarang!. Tapi jika aku pergi siapa yang akan menemani Aldi?"
-    hide mc
+    hide mc2
     menu:
         "Duduk bersama Aldi":
             show mc at right
@@ -267,12 +278,12 @@ label signOfStrangeness:
             hide mc
 
             scene bg classroom
-            show mc at right
+            show mc2 at right
             mc "(Berbisik) Aldi, ayo buruan keluar. Entitas di depan kita nggak menapak tanah!"
-            hide mc
-            show aldi at left
+            hide mc2
+            show aldi1 at left
             al "!!!"
-            hide aldi
+            hide aldi1
             "Menyadari kejanggalan tersebut, Della dan Aldi mencoba meminta izin pulang ke 'dosen' yang sedang mengajar."
             
             scene bg blackboard
@@ -281,16 +292,18 @@ label signOfStrangeness:
             hide mc
             show ds #zoom on center
             "Dosen berhenti berbicara. Beliau menatap Della dan Aldi dengan tatapan kosong."
-            #insert villain laughter <chuckle>
-            ds "Sudah malam, atau sudah tahu?"
-            show ds #make it closer or should we make it into background?
             hide ds
+            #insert villain laughter <chuckle>
+            show dss
+            ds "Sudah malam, atau sudah tahu?"
+            #show dss #make it closer or should we make it into background?
+            hide dss
             jump blackout
         
         "Ajak Aldi Pulang":
-            show mc at right
+            show mc2 at right
             mc "Aldi! Ayo keluar, kumohon!!!"
-            hide mc
+            hide mc2
             show aldi at left
             al "Ah! Takut amat kamu!"
             hide aldi
@@ -301,23 +314,23 @@ label blackout:
     scene bg black
     "Lampu ruang Kelas 111 mati secara tiba tiba."
     mc "Aku... pusing sekali."
-    "Della dan Aldi terkapar di lantai tidak sadarkan diri."
+    "Della terkapar di lantai tidak sadarkan diri."
     jump wokeUp
 
 label wokeUp:
     scene bg aisle
-    show mc at right
+    show mc2 at right
     mc "Aldi?"
     mc "ALDI?"
     mc "ALDI DI MANA KAMU?"
-    hide mc
+    hide mc2
     "Tidak ada tanda Aldi dimanapun Della melihat. Tak lama, Della menyadari bahwa dia memegang secarik kertas."
     scene bg paper clue
-    show mc at right
+    show mc2 at right
     mc "Kamu bisa keluar kalau menemukan 4 petunjuk."
     mc "Aldi... Aku tidak bisa menemukan Aldi..."
     mc "Dia hilang dan aku terjebak di sini!"
-    hide mc
+    hide mc2
 
     #transition
     scene bg mission #word mission with bg black. like this: mission n/ Cari 4 Petunjuk dan Selamatkan Aldi
@@ -439,49 +452,32 @@ label labGiga:
             mc "Lab ini juga terkunci."
             mc "Sepertinya aku harus mengecek lab lain."
             hide mc
-            jump labMCI
+            jump labKBJ
         
         "Kembali":
             jump labEvent
 
-label labMCI:
+label labKBJ:
     menu:
         "Kemanakah Della harus mengecek?"
-        "Lab. Manajemen Cerdas Informasi":
-            scene bg mci
-            show mc at right
-            mc "Tidak ada harapan. Lab ini tidak bisa dibuka."
-            mc "Sepertinya aku harus mengecek lab lain."
-            hide mc
-            jump labPKT
-        
-        "Kembali":
-            jump labGiga
-
-label labPKT:
-    menu:
-        "Kemanakah Della harus mengecek?"
-        "Lab. Pemodelan dan Komputasi Terapan":
-            scene bg pkt
+        "Lab. Komputasi Berbasis Jaringan":
+            scene bg kbj
             show mc at right
             mc "Ugh. Sepertinya aku harus kembali ke titik awal."
             hide mc
-            jump labMCI
+            jump labKCV
 
 label labHappening:
     scene bg rpl
     show mc at right
     mc "Komputer-komputer disini tidak seperti biasanya."
-    mc "Model ini sepertinya dari tahun ...."
+    mc "Model ini sepertinya sudah sangat lama"
     hide mc
 
     scene bg biner1
     show mc at right
     mc "Hah? Kenapa komputer ini menyala sendiri?"
     hide mc
-    scene bg biner2
-    scene bg biner3
-    scene bg biner4
 
     "Pada komputer di depan pintu masuk, muncul layar penuh kode biner mengalir."
 
@@ -489,27 +485,23 @@ label labHappening:
     mc "Layar tersebut seolah membujukku untuk mendekat."
     hide mc
 
-    "Della mengecek komputer tersebut dan menyadari bahwa terdapat dua pilihan yang terpampang."
+    "Della mendekati komputer tersebut dan menyadari bahwa salah satu komputer menampilkan hal yang berbeda."
 
     show mc at right
+    mc "Apa ini?"
+    mc "Pilih jalur dengan rotasi kanan?"
     mc "01010010 dan 01001100"
+    mc "Apa maksudnya?"
+    mc "Apakah aku disuruh untuk memilih ini secara acak?"
+    mc "Apa yang terjadi jika aku salah memilih?"
+    mc "Hmm."
     mc "Kalau dihitung valuenya, bit 0 melambangkan 0."
     mc "Lalu bit 1 melambangkan 2 pangkat n yang dimulai dari urutan 0 dan dibaca dari kanan. Kemudian semuanya dijumlahkan."
     mc "Jadi 01010010 memiliki nilai 0 2 0 0 16 0 64 0, 82 yaitu value ASCII dari R!"
-    mc "01001100 memiliki nilai 0 0 4 8 0 0 64 0, 82 yaitu value ASCII dari L!"
+    mc "01001100 memiliki nilai 0 0 4 8 0 0 64 0, 76 yaitu value ASCII dari L!"
     hide mc
 
     "Setelah mengetahui arti dari kode tersebut, Della merasa semakin putus asa."
-
-    show mc at right
-    mc "Apakah aku disuruh untuk memilih ini secara acak?"
-    mc "Apa yang terjadi jika aku salah memilih?"
-    mc "Sepertinya aku harus mencari clue lanjutan."
-    hide mc
-
-    scene bg rpl
-    "Bertekad bulat untuk menyelesaikan puzzle tersebut, Della merogoh satu-persatu laci meja di lab tersebut."
-    "Tak berselang lama, della menemukan secarik kertas putih di meja ujung."
 
     show mc at right
     mc "'Pilih jalur dengan rotasi kanan'"
@@ -518,33 +510,34 @@ label labHappening:
     mc "Hmm... {i}Right{/i}..."
     hide mc
 
-    scene bg biner4
+    scene bg biner1
     menu:
         "Jawaban mana yang benar?"
         "01010010":
             show mc at right
             mc "Kata kuncinya di RIGHT! Jawabannya R!"
             hide mc
-            scene bg blackoutScreen
+            scene bg biner2
             #insert sound bzztt
-            scene bg rScreen
-            show mc at right
+            #scene bg rScreen
+            show mc5 at right
             mc "Yes! Aku berhasil mendapatkan clue!"
-            hide mc
+            hide mc5
             $ lab_is_solved = True
             jump exploration
 
         "01001100":
-            show mc at right
+            scene bg biner3
+            show mc2 at right
             #insert sound bzztt
             mc "AH! Layarnya meledak!"
-            hide mc
+            hide mc2
             #insert gibberish sound
             "Bayangan kelam muncul dari dalam monitor dan berusaha menarik Della ke dalamnya."
-            show mc at right
+            show mc2 at right
             #insert no
             mc "TIDAK!!!"
-            hide mc
+            hide mc2
             scene bg black
             $ lab_is_solved = False
             jump exploration
@@ -554,10 +547,10 @@ label classEvent:
     "Ruangan kelas 101 masih memiliki kursi kayu jati tergabung meja yang sama."
     show mc at right
     #sound light chuckle
-    mc "Jika aku tidak melihat komputer tua dan papan tulis hitam di depan, aku akan mengira ruang kelas ini masih ruang kelas di tahun 2025."
+    mc "Tapi papan tulisnya model lama yang menggunakan kapur."
     hide mc
 
-    scene bg blackboard
+    scene bg class1
     show mc at right
     mc "Network graph yang tergambar di papan tulis ini sama dengan yang aku lihat di Kelas 111 sebelum aku dan Aldi terpisah."
     hide mc
@@ -578,12 +571,11 @@ label classEvent:
             mc "Aku rasa jawaban yang benar adalah Bipartite soalnya menghubungkan DUA grup"
             mc "Kata kuncinya juga merujuk pada angka dua."
             hide mc
-            scene bg blankBlackboard
             "Coretan pada papan perlahan lenyap."
-            scene bg bBlackboard
-            show mc at right
+            scene bg class2
+            show mc5 at right
             mc "Berhasil! Aku memilih jawaban yang tepat!"
-            hide mc
+            hide mc5
             $ class_is_solved = True
             jump exploration
         
@@ -592,26 +584,27 @@ label classEvent:
             mc "Aku rasa Graf Cycle merupakan jawaban yang benar."
             mc "Graf Cycle bisa menghubungkan dua dunia juga, kan?"
             hide mc
+            scene bg class3
             "Semua coretan di papan hidup."
             "Coretan-coretan tersebut berubah menjadi tangan-tangan panjang yang mencoba menangkan Della."
-            show mc at right
+            show mc3 at right
             mc "AH! Apa yang terjadi?"
             mc "Jawabanku benar!"
-            hide mc
+            hide mc3
             "Della menghindari tangan-tangan yang ingin menariknya. Dengan panik dia berlari menuju ke pintu."
             scene bg 101
-            show mc at right
+            show mc2 at right
             mc "Ayo cepat terbuka!!!"
-            hide mc
+            hide mc2
             "Pintu ruang kelas nyaris tak bisa dibuka. Setelah beberapa kali percobaan akhirnya dia berhasil keluar dari ruangan tersebut."
             $ class_is_solved = False
             jump exploration
 
 label canteenEvent:
-    scene bg 111
-    show mc at right
+    scene bg aisleC
+    show mc2 at right
     mc "Ugh... Kenapa lampunya senternya mati..."
-    hide mc
+    hide mc2
     "Satu-satunya penerangan yang dimiliki oleh Della mati tiba-tiba."
     "Mata Della berusaha keras untuk menyesuaikan dengan kegelapan."
     scene bg canteen
@@ -633,7 +626,7 @@ label canteenEvent:
     show ct at left
     ct "Kamu perlu percaya pada logika..."
     hide ct
-    "Suara Ibu Kantin terdengar sangat halus. Della berpikir keras untuk mengartikan hint tersebut."
+    "Suara Ibu Kantin terdengar sangat halus dan dingin. Della berpikir keras untuk mengartikan hint tersebut."
     menu:
         "Apa yang akan kamu pilih?"
         "Nasi Goreng":
@@ -660,21 +653,21 @@ label canteenEvent:
 
 label canteenMenu:
     scene bg canteen
-    show mc at right
+    show mc2 at right
     mc "APA YANG TERJADI?"
     mc "AHH!!!"    
-    hide mc
-    "Wajah ibu kantin meleleh perlahan, menjadi sosok hitam berlendir."
-    show ct
+    hide mc2
+    "Ibu kantin menyeringai dan matanya berubah menjadi merah."
+    show ct1
     ct "HII... HIIIIIIIIIIIIII"
-    hide ct
+    hide ct1
     scene bg staticElectricity
     scene bg canteen
     scene bg staticElectricity
     scene bg canteen
-    show mc at right
+    show mc2 at right
     mc "Aku harus segera pergi dari sini!!!"    
-    hide mc
+    hide mc2
     "Della berlari menuju ke lorong awal"
     scene bg black
     jump exploration
