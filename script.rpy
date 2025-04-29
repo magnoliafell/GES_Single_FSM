@@ -32,6 +32,8 @@ image bg netics = "images/bg/ajk.jpg"
 image bg alpro = "images/bg/alpro.jpg"
 image bg kbj = "images/bg/kbj.jpg"
 image bg aula = "images/bg/aula.png"
+image bg aula2 = "images/bg/aula2.png"
+image bg aula3 = "images/bg/aula3.png"
 image bg canteen = "images/bg/canteen.jpg"
 image bg car parkinglot = "images/bg/car.jpg"
 image bg aisle = "images/bg/aisle.jpg"
@@ -54,15 +56,17 @@ image bg blackoutScreen = "images/bg/blackoutScreen.png"
 image bg rScreen = "images/bg/rScreen.png"
 image bg blankBlackboard = "images/bg/blankBlackboard.png"
 image bg bBlackboard = "images/bg/bBlackboard.png"
-image bg staticElectricity = "images/bg/staticElectricity.jpg"
+image bg staticElectricity = "imagess/bg/staticElectricity.jpg"
 image bg fog = "images/bg/staticElectricity.jpg"
 image bg white = "images/bg/white.jpg"
 image bg class1 = "images/bg/class1.png"
 image bg class2 = "images/bg/class2.png"
 image bg class3 = "images/bg/class3.png"
+image bg staircase = "images/bg/staircase.png"
 # The game starts here.
 
 label start:
+    play music "<from 0.0 to 41.0>horrorMusic.mp3"
     scene bg supeno
     show aldi at left
     al "Kamu... pernah dengar rumor kelas tengah malam di TC?"
@@ -87,7 +91,7 @@ label start:
             hide aldi
             $ is_investigating = True
         "Tidak mau menyelidiki":
-            show mc1
+            show mc1 at right
             mc "Kayaknya mending kita pulang aja deh. Perasaanku ga enak."
             $ is_investigating = False
 
@@ -174,15 +178,19 @@ label secondChoice:
         jump firstChoice
 
 label firstEvent:
+    stop music fadeout 1.0
     scene bg 111
     "Sesampainya di sana, mereka mendengar suara bising dari dalam kelas."
+    play sound "classNoise.mp3"
+    ""
+    stop sound
     show aldi at left
     al "Tuh kan! Bener ada!"
     hide aldi
     show mc4 at right
-    mc "Gila, kok bisaada suara jam segini."
+    mc "Gila, kok bisa ada suara jam segini."
     # hide mc
-    "{i}Aku rasa kita harus menghentikan penyelidikan ini. Tapi... Kita sudah sejauh ini."
+    mc "{i}Aku rasa kita harus menghentikan penyelidikan ini. Tapi... Kita sudah sejauh ini."
     hide mc4
     "Della merasa semakin bimbang. Della merasa bahwa mereka harus menghentikan penyelidikan mereka di sini. Namun di sisi lain, Della juga penasaran atas kebenaran rumor tersebut."
     menu:
@@ -206,27 +214,30 @@ label event111:
     hide mc
     "Kalian memilih untuk masuk ke dalam kelas."
     scene bg pintu111
-    #insert sound door knocking
+    play sound "doorknock.mp3"
     "{i}Tok... Tok... Tok.."
+    stop sound
     ds "Masuk saja, pintunya tidak dikunci."
     scene bg black
-    #insert sound door opening
+    play sound "doorOpen.mp3"
     "Pintu dibuka secara perlahan. Di dalam, terlihat seorang dosen yang mengajar di depan banyak mahasiswa lain-"
+    stop sound
     scene bg classroom
-    #insert sound heartbeat
-    # "{i}Deg... Deg.. Deg..."
     "-tetapi semua wajah mahasiswa di dalam terlihat kabur!"
+    play sound "heartbeat.mp3"
     "{i}Deg... Deg.. Deg..."
     #insert sound chair being pulled
+    stop sound
     "Melihat hal tersebut, Aldi yang {i} excited {/i} langsung mengambil bangku paling depan."
-    show mc2 #focus on center, zoom
-    "{i} AH! Aku harus pulang sekarang!. Tapi jika aku pergi siapa yang akan menemani Aldi?"
+    show mc2 at right #focus on center, zoom
+    mc "{i} AH! Aku harus pulang sekarang!. Tapi jika aku pergi siapa yang akan menemani Aldi?"
     hide mc2
     menu:
         "Duduk bersama Aldi":
             show mc at right
             "{i}Kurasa tidak ada salahnya mencoba duduk sebentar. Siapa tau aku akan menemukan akar dari semua hal aneh ini."
             hide mc
+            play music "<from 0.0 to 41.0>  volume 0.1 horrorMusic.mp3"
             "Della dan Aldi menatap papan tulis untuk mengikuti materi yang tengah diajarkan oleh dosen misterius tersebut."
             show mc at right
             "{i}Aneh... Aku merasa hawa di sini semakin dingin."
@@ -257,9 +268,11 @@ label signOfStrangeness:
     al "...mereka ini semua hantu!"
     hide aldi
     "Aldi tertawa dengan keras."
+    play sound "man laugh 2.mp3"
     #insert laughter
     show aldi at left
     al "HAHAHAHA"
+    stop sound
     al "Nggak mungkin lah, Del. Jelas jelas penampilan mereka seperti manusia, kok!"
     hide aldi
     "Bulu kuduk Della berdiri. Insting Della menyuruhnya untuk segera pergi dari ruang kelas tersebut."
@@ -413,7 +426,7 @@ label exploration:
             "Aula":
                 scene bg aula
                 "Aula Handayani berada di Lantai 2. Aula ini digunakan untuk kegiatan yang melibatkan 200 orang, seperti workshop, atau kelas besar."
-                "Aula Handayani berada di sebelah ... (gatau)"
+                "Aula Handayani berada di sebelah Ruang Staff Tata Usaha"
                 jump aulaEvent
             
 label labKCV:
@@ -642,7 +655,7 @@ label canteenEvent:
             $ canteen_is_solved = False
             jump canteenMenu
         "Tungtungtungsahur":
-            scene bg fog
+            scene bg canteen
             "Ibu kantin perlahan menghilang seperti kabut"
             show ct
             ct "Pilihan yang tepat."
@@ -673,10 +686,165 @@ label canteenMenu:
     jump exploration
 
 label aulaEvent:
-    $ aula_is_solved = True
+    scene bg aisle
+    show mc at right
+    mc "{i}Harusnya di sini nggak ada apa-apa kan ya?"
+    mc "{i}Kenapa jantungku berdebar semakin keras..."
+    mc "{i}Perasaanku semakin nggak enak..."
+    hide mc
+    "Pintu aula terbuka dengan sendirinya. Lampu-lampu berkedip dengan sendirinya. Penerangan yang biasanya memberi suasana nyaman kini terasa mencekik."
+    "Della memberanikan diri untuk mendekati pantulan dari layar proyektor yang menampilkan kode aneh."
+    scene bg aula
+    show mc at right
+    mc "Apa artinya ini?"
+    mc "Apakah aku disuruh untuk menulis output?"
+    hide mc
+
+    "Terdengar suara samar-samar yang menggema dari arah luar aula."
+    "Suara tersebut terus mengulang hal yang sama."
+    "Bak berbisik di telinga Della, suara tersebut mengucapkan suatu kalimat-"
+    "'Pilih asal mula dari segalanya...'"
+    "Muncul 4 pilihan di depan Della."
+    show mc at right
+    mc "{i}Oke. Aku mengerti. Aku diminta untuk memilih bahasa pemrograman yang sesuai kan?"
+    mc "{i}Thank God{i}. Aku tahu jawabannya."
+    hide mc
+
+    menu:
+        "Kotlin":
+            $ aula_is_solved = False
+            jump aulaMenu
+        "Java":
+            $ aula_is_solved = False
+            jump aulaMenu
+        "Python":
+            $ aula_is_solved = False
+            jump aulaMenu
+        "C":
+            show mc at right
+            mc "{i}Hmm... Aku akan memilih C."
+            hide mc
+            "Layar seketika memerah."
+            scene bg aula3
+            "'C' terpampang di layar proyektor."
+            show mc at right
+            mc "Hore! Sepertinya ini jawaban yang benar!"
+            hide mc
+            show black
+            $ aula_is_solved = True
+            jump exploration
+
+label aulaMenu:
+    scene bg aula2
+    show mc2 at right
+    mc "APA YANG TERJADI?"
+    mc "AHH!!!"    
+    hide mc2
+    "Layar menunjukkan ribuan error."
+    scene bg aula2
+    show mc2 at right
+    mc "Aku harus segera pergi dari sini!!!"    
+    hide mc2
+    "Della berlari menuju ke lorong awal"
+    scene bg black
     jump exploration
 
 label finalPuzzle:
-    "True"
+    scene bg 111
+    show mc at right
+    mc "Ugh.. Aku sudah menemukan keempat clue yang dimaksud."
+    mc "Apa yang harus kulakukan dengan ini?"
+    mc "Di masing-masing tempat aku menemukan huruf-huruf berupa C, B, T, dan R."
+    mc "Apakah aku diminta untuk menggabungkan semuanya?"
+    mc "Tapi tidak ada kata yang bisa dibentuk. Bahkan tidak ada huruf vokal..."
+    mc "Ah, sebentar"
+    hide mc
+    show mc4 at right
+    mc "R-B-T-C."
+    mc "Huruf-huruf ini bisa dikombinasikan menjadi RBTC!"
+    hide mc4
+    show mc at right
+    mc "Haruskah aku ke sana?"
 
-return
+    menu:
+        "Pergi":
+            mc "Oke. Aku sudah mendapatkan semua cluenya. Tidak ada alasan untuk aku tidak pergi."
+            scene bg staircase
+            mc "Apakah aku harus menyelesaikan puzzle lagi?"
+            mc "Aku masih perlu mencari Aldi... Aku khawatir padanya"
+            hide mc
+            "Della yang khawatir dengan Aldi bergegas menaiki tangga menuju RBTC."
+            "Terlihat Aldi yang terbujur lemas di balik ruang kelas."
+            scene bg rbtc
+            show mc at right
+            mc "ALDI!!"
+            mc "Aldi! Bangun! Ayo kita keluar!!"
+            mc "Ahh!! Pintunya tidak bisa terbuka!!!"
+            mc "Apa yang harus kulakukan..."
+            hide mc
+            "Dari pojok pandangnya, Della melihat tangan Aldi menunjuk ke arah depan."
+            show mc at right
+            mc "Apakah aku diminta untuk mengecek loker-loker ini?"
+            hide mc
+            "Dari kertas yang tergeletak di atas meja tertulis clue untuk menyelesaikan puzzle terakhir."
+            scene bg loker
+            show mc at right
+            mc "'Kamu hanya bisa memilih satu loker.'"
+            mc "'Tempat pertama kamu ragu, waktu adalah pintu'."
+            mc "Tempat pertama aku ragu?"
+            show mc4 at right
+            mc "Apakah itu saat aku berpikir untuk melanjutkan penyelidikan tentang rumor ini?"
+            mc "Saat itu Aldi mengajak bertemu pada pukul 23.11."
+            hide mc4
+            show mc at right
+            mc "Jadi... 2? 3? atau 1?"
+            mc "Semua kejadian ini bermula dari kelas 111"
+            mc "Jadi mungkin..."
+            mc "Aku harus memilih loker 1?"
+            mc "Oke. Aku tidak peduli ini benar atau salah. Aku akan mencoba untuk membuka loker 1."
+            hide mc
+            "Dengan segera, Della membuka loker 1 yang menyimpan sebuah kunci."
+            show mc5 at right
+            mc "Kunci! Apakah ini kunci untuk membuka ruang kelas RBTC?"
+            hide mc
+            "Della berhasil membuka RBTC dengan kunci yang ditemukannya di loker 1."
+            scene bg rbtc
+            show mc at right
+            mc "TERBUKA!"
+            mc "ALDI! Ayo kita pergi dari sini!"
+            hide mc
+            show aldi at left
+            al "Della? Apa yang terjadi? Kenapa aku di sini?"
+            al "Aku mengalami mimpi buruk dimana aku-"
+            hide aldi
+            show mc at right
+            mc "Kita bisa bicarakan itu nanti. Ayo kita keluar sekarang."
+            mc "Kita tidak punya banyak waktu"
+            hide mc
+            scene bg infor
+            "Della dan Aldi berhasil keluar dari Gedung Departemen Informatika. Malam ini merupakan malam yang tidak akan pernah dilupakan oleh mereka berdua."
+            "Terima kasih telah mengikuti cerita kami."
+            return
+        
+        "Memikirkan ulang":
+            mc "Mengingat kejadian-kejadian aneh yang aku alami, sepertinya memikirkan ulang merupakan keputusan terbaik."
+            #insert sound noise
+            mc "Suara apa itu?"
+            #insert sound noi~se
+            hide mc
+            show mc4 at right
+            mc "{i}Dosen 111? Sejak kapan dia berdiri di sampingku?"
+            mc "{i}Aku akan pergi dari sini secara diam diam."
+            hide mc4
+            show dss at left
+            ds "...Ma...U...Ke...Ma...Na...?"
+            ds "...SUDAAAAAAAHHH...TAAAAUUU...YA...."
+            hide dss
+            show black
+            "Della tidak berhasil menghindari cengkraman dosen tersebut."
+            "Ketika dia kembali sadar, dia sudah berada di titik awal pencarian."
+            $ class_is_solved = False
+            $ aula_is_solved = False
+            $ lab_is_solved = False
+            $ canteen_is_solved = False
+            jump exploration
