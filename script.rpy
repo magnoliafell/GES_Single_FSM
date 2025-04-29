@@ -5,6 +5,10 @@ define mc = Character("Della") #mcnya della
 define al = Character("Aldi")
 define ds = Character("??")
 
+default lab_is_solved = False
+default class_is_solved = False
+default aula_is_solved = False
+default canteen_is_solved = False
 image bg supeno = "images/bg/supeno.png"
 image bg lobby = "images/bg/lobby.png"
 image bg classroom = "images/bg/classroom.png"
@@ -319,9 +323,9 @@ label wokeUp:
 #paper = map?
 label exploration:
     scene bg aisle
-    # if lab_is_solved and class_is_solved and aula_is_solved and canteen_is_solved:
-    #     jump finalPuzzle
-    # else:
+    if lab_is_solved and class_is_solved and aula_is_solved and canteen_is_solved:
+        jump finalPuzzle
+    else:
         "Petunjuk di kertas mengarah ke 4 tempat utama. Kantin, Aula, Kelas, dan Lab."
         "Tanpa membuang-buang waktu Della segera berjalan menuju lokasi pertamanya yaitu..."
         menu:
@@ -485,11 +489,11 @@ label labHappening:
     "Della mengecek komputer tersebut dan menyadari bahwa terdapat dua pilihan yang terpampang."
 
     show mc at right
-    mc "\\\"01010010\\\" dan \\\"01001100\\\""
+    mc "01010010 dan 01001100"
     mc "Kalau dihitung valuenya, bit 0 melambangkan 0."
     mc "Lalu bit 1 melambangkan 2 pangkat n yang dimulai dari urutan 0 dan dibaca dari kanan. Kemudian semuanya dijumlahkan."
-    mc "Jadi \\\"01010010\\\" memiliki nilai 0 2 0 0 16 0 64 0, 82 yaitu value ASCII dari R!"
-    mc "\\\"01001100\\\" memiliki nilai 0 0 4 8 0 0 64 0, 82 yaitu value ASCII dari L!"
+    mc "Jadi 01010010 memiliki nilai 0 2 0 0 16 0 64 0, 82 yaitu value ASCII dari R!"
+    mc "01001100 memiliki nilai 0 0 4 8 0 0 64 0, 82 yaitu value ASCII dari L!"
     hide mc
 
     "Setelah mengetahui arti dari kode tersebut, Della merasa semakin putus asa."
@@ -505,7 +509,7 @@ label labHappening:
     "Tak berselang lama, della menemukan secarik kertas putih di meja ujung."
 
     show mc at right
-    mc "\\\"Pilih jalur dengan rotasi kanan\\\""
+    mc "'Pilih jalur dengan rotasi kanan'"
     mc "Rotasi Kanan?"
     mc "Hmm... {i}Right Rotation{/i}... Pada Bitwise Shift rotasi ke kanan berarti {i}Right Shift{/i}..."
     mc "Hmm... {i}Right{/i}..."
@@ -516,7 +520,7 @@ label labHappening:
         "Jawaban mana yang benar?"
         "01010010":
             show mc at right
-            mc "Kata kuncinya di \\\"RIGHT!\\\" Jawabannya R!"
+            mc "Kata kuncinya di RIGHT! Jawabannya R!"
             hide mc
             show bg blackoutScreen
             #insert sound bzztt
@@ -578,6 +582,7 @@ label classEvent:
             mc "Berhasil! Aku memilih jawaban yang tepat!"
             hide mc
             $ class_is_solved = True
+            jump exploration
         
         "Graf Cycle":
             show mc at right
@@ -600,9 +605,11 @@ label classEvent:
             jump exploration
 
 label canteenEvent:
+    $ canteen_is_solved = False
     "start"
 
 label aulaEvent:
+    $ aula_is_solved = False
     "start"
 
 return
