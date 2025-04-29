@@ -4,11 +4,13 @@ define mc = Character("Della") #mcnya della
 # define na = Character("Nadia")
 define al = Character("Aldi")
 define ds = Character("??")
+define ct = Character("Ibu Kantin")
 
 default lab_is_solved = False
 default class_is_solved = False
 default aula_is_solved = False
 default canteen_is_solved = False
+
 image bg supeno = "images/bg/supeno.png"
 image bg lobby = "images/bg/lobby.png"
 image bg classroom = "images/bg/classroom.png"
@@ -21,12 +23,10 @@ image bg netics = "images/bg/netics.png"
 image bg mci = "images/bg/mci.png"
 image bg alpro = "images/bg/alpro.png"
 image bg aula = "images/bg/aula.png"
-image bg rooftop = "images/bg/rooftop.png"
-image bg bathroom = "images/bg/bathroom.png"
 image bg canteen = "images/bg/canteen.png"
 image bg car parkinglot = "images/bg/car.png"
 image bg aisle = "images/bg/aisle.png"
-image bg aisle canteen = "images/bg/aisleeC.png"
+image bg aisleC = "images/bg/aisleeC.png"
 image bg 111 = "images/bg/111.png"
 image bg black = "images/bg/black.png"
 image bg pintu 111 = "images/bg/pintu111.png"
@@ -34,7 +34,6 @@ image bg 105 = "images/bg/105.png"
 image bg 107 = "images/bg/107.png"
 image bg 101 = "images/bg/101.png"
 image bg musholla = "images/bg/musholla.png"
-image bg tu = "images/bg/tu.png"
 image bg floor = "images/bg/floor.png"
 image bg blackboard = "images/bg/blackboard.png"
 image bg pcstart = "images/bg/pcstart.png"
@@ -46,6 +45,10 @@ image bg biner4 = "images/bg/biner4.png"
 image bg blackoutScreen = "images/bg/blackoutScreen.png"
 image bg rScreen = "images/bg/rScreen.png"
 image bg blankBlackboard = "images/bg/blankBlackboard.png"
+image bg bBlackboard = "images/bg/bBlackboard.png"
+image bg staticElectricity = "images/bg/staticElectricity.png"
+image bg fog = "images/bg/staticElectricity.png"
+image bg white = "images/bg/white.png"
 # The game starts here.
 
 label start:
@@ -327,7 +330,7 @@ label exploration:
         jump finalPuzzle
     else:
         "Petunjuk di kertas mengarah ke 4 tempat utama. Kantin, Aula, Kelas, dan Lab."
-        "Tanpa membuang-buang waktu Della segera berjalan menuju lokasi pertamanya yaitu..."
+        "Tanpa membuang-buang waktu Della segera berjalan menuju lokasi yang dia pilih yaitu..."
         menu:
             "Lab":
                 label labEvent:
@@ -386,11 +389,11 @@ label exploration:
                 jump classEvent
         
             "Kantin":
-                scene bg aisleeC
+                scene bg aisleC
                 "Kantin Teknik Informatika terletak di sebelah parkiran mobil."
                 "Untuk menuju kantin, Della dapat keluar dari Lobby, menuju ke tempat parkir mobil, lalu berjalan ke arah barat, atau melewati lorong di depan 111, lalu berjalan ke arah selatan."
                 show mc at right
-                mc "Sepertinya aku akan lewat lorong 101 untuk menghemat waktu."
+                mc "Sepertinya aku akan lewat lorong 111 untuk menghemat waktu."
                 hide mc
                 jump canteenEvent
             
@@ -522,9 +525,9 @@ label labHappening:
             show mc at right
             mc "Kata kuncinya di RIGHT! Jawabannya R!"
             hide mc
-            show bg blackoutScreen
+            scene bg blackoutScreen
             #insert sound bzztt
-            show bg rScreen
+            scene bg rScreen
             show mc at right
             mc "Yes! Aku berhasil mendapatkan clue!"
             hide mc
@@ -605,11 +608,82 @@ label classEvent:
             jump exploration
 
 label canteenEvent:
-    $ canteen_is_solved = False
-    "start"
+    scene bg 111
+    show mc at right
+    mc "Ugh... Kenapa lampunya senternya mati..."
+    hide mc
+    "Satu-satunya penerangan yang dimiliki oleh Della mati tiba-tiba."
+    "Mata Della berusaha keras untuk menyesuaikan dengan kegelapan."
+    scene bg canteen
+    "Tak lama, ia berjumpa dengan seseorang yang memakai pakaian layaknya ibu kantin."
+    "Wanita tersebut berdiri diam dengan senyum yang kosong"
+    "Senyumnya melebar ketika dia melihat Della mendekat"
+    show mc at right
+    mc "Halo, apakah kamu tadi melihat seorang laki-laki seumuranku dengan baju krem?"
+    mc "Halo? Apakah kamu mendengarku?"
+    hide mc
+    show ct at left
+    ct "..."
+    hide ct
+    "Tak mendapat jawaban yang diinginkan, Della memfokuskan pandangannya ke daftar menu di meja."
+    "Tertulis 5 menu di kertas tersebut: Nasi goreng, Mi goreng, Nasi campur, Ketoprak, dan Tungtungtungsahur."
+    show mc at right
+    mc "{i} Kenapa ada tungtungtungsahur di sini?"
+    hide mc
+    show ct at left
+    ct "Kamu perlu percaya pada logika..."
+    hide ct
+    "Suara Ibu Kantin terdengar sangat halus. Della berpikir keras untuk mengartikan hint tersebut."
+    menu:
+        "Apa yang akan kamu pilih?"
+        "Nasi Goreng":
+            $ canteen_is_solved = False
+            jump canteenMenu
+        "Mi Goreng":
+            $ canteen_is_solved = False
+            jump canteenMenu
+        "Nasi Campur":
+            $ canteen_is_solved = False
+            jump canteenMenu
+        "Ketoprak":
+            $ canteen_is_solved = False
+            jump canteenMenu
+        "Tungtungtungsahur":
+            scene bg fog
+            "Ibu kantin perlahan menghilang seperti kabut"
+            show ct
+            ct "Pilihan yang tepat."
+            hide ct with Dissolve(3)
+            $ canteen_is_solved = True
+            scene bg white
+            jump exploration
+
+label canteenMenu:
+    scene bg canteen
+    show mc at right
+    mc "APA YANG TERJADI?"
+    mc "AHH!!!"    
+    hide mc
+    "Wajah ibu kantin meleleh perlahan, menjadi sosok hitam berlendir."
+    show ct
+    ct "HII... HIIIIIIIIIIIIII"
+    hide ct
+    scene bg staticElectricity
+    scene bg canteen
+    scene bg staticElectricity
+    scene bg canteen
+    show mc at right
+    mc "Aku harus segera pergi dari sini!!!"    
+    hide mc
+    "Della berlari menuju ke lorong awal"
+    scene bg black
+    jump exploration
 
 label aulaEvent:
-    $ aula_is_solved = False
-    "start"
+    $ aula_is_solved = True
+    jump exploration
+
+label finalPuzzle:
+    "True"
 
 return
